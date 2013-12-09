@@ -1,0 +1,11 @@
+name: KillMoney
+version: 2.1
+main: de.daniel0916.KillMoney.KillMoney
+author: daniel0916
+
+depend: [Vault]
+
+commands:
+    killmoney:
+        description: 
+        usage: /<command> <command>

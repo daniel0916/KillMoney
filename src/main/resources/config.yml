@@ -1,0 +1,80 @@
+KillMoney:
+  Enable: 'true'
+  Prefix: '&9[KillMoney] '
+  Worlds:
+    1: 'world'
+    2: ''
+    3: ''
+  Player:
+    KillerPrice: 1.0
+    DeathPrice: 1.0
+    AllowMinusMoneyByDeath: 'true'
+    showKillMessage: 'on'
+    showDeathMessage: 'on'
+    KillMessage: '&aYou have get Money for Killing &b<Player>'
+    DeathMessage: '&eYou lost Money for been killed from &b<Killer>'
+  Mob:
+    Creeper:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Creeper'
+    Zombie:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Zombie'
+    Spider:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Spider'
+    Skeleton:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Skeleton'
+    Blaze:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Blaze'
+    Cave_Spider:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Cave Spider'
+    Ender_Dragon:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Ender Dragon'
+    Enderman:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Enderman'
+    Ghast:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Ghast'
+    Giant:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Giant'
+    Magma_Cube:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Magma Cube'
+    Pig_Zombie:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Pig Zombie'
+    Silverfish:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Silverfish'
+    Slime:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Slime'
+    Witch:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Witch'
+    Wither:
+      Price: 1.0
+      showMessage: 'on'
+      Message: '&aYou have get Money for Killing a &9Wither'
