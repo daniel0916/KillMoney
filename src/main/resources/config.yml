@@ -8,9 +8,9 @@ KillMoney:
   Player:
     KillerPrice: 1.0
     DeathPrice: 1.0
-    //When a player died and they have not enough money they will become minus money when it's true.
+    #When a player died and they have not enough money they will become minus money when it's true.
     AllowMinusMoneyByDeath: 'true'
-    //When you kill a player with not enough money you will become money when it's true.
+    #When you kill a player with not enough money you will become money when it's true.
     KillMoneyWhenPlayerHaveNoMoney: 'true'
     showKillMessage: 'on'
     showDeathMessage: 'on'
