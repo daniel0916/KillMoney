@@ -71,8 +71,6 @@ public class KillMoney extends JavaPlugin{
 			System.out.println("[KillMoney] Can't load Metrics.");
 		}
 		
-		loadVault();
-		
 		this.getServer().getPluginManager().registerEvents(new PlayerListener(), this);
 		
 		this.getServer().getPluginManager().registerEvents(new Entity_Blaze(), this);
@@ -91,11 +89,13 @@ public class KillMoney extends JavaPlugin{
 		this.getServer().getPluginManager().registerEvents(new Entity_Witch(), this);
 		this.getServer().getPluginManager().registerEvents(new Entity_Wither(), this);
 		this.getServer().getPluginManager().registerEvents(new Entity_Zombie(), this);
+		
+		loadVault();
 	}
 	
 	private void loadVault() {
 		if (!setupEconomy() ) {
-			System.out.println("No Vault found");
+			getServer().getConsoleSender().sendMessage(ChatColor.RED + "[KillMoney] No Vault found");
 			getServer().getPluginManager().disablePlugin(this);
 			return;
 		}
@@ -142,7 +142,7 @@ public class KillMoney extends JavaPlugin{
 						return true;
 					}
 				}else{
-					sender.sendMessage("You dont have the permissions for this command!");
+					sender.sendMessage("You don't have permissions for this command!");
 					return true;
 				}
 			}
