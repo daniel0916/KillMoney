@@ -19,10 +19,9 @@ public class PlayerListener implements Listener{
 	String DeathPrice = "KillMoney.Player.DeathPrice";
 	double deathprice = KillMoney.cfg.getDouble(DeathPrice);
 	
-	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		if(KillMoney.cfg.getString("KillMoney.Enable").equalsIgnoreCase("true")) {
+		if (KillMoney.cfg.getString("KillMoney.Enable").equalsIgnoreCase("true")) {
 			Player p = event.getEntity().getPlayer();
 			Player killer = event.getEntity().getKiller();
 			
@@ -31,8 +30,8 @@ public class PlayerListener implements Listener{
 				String w1 = KillMoney.cfg.getString("KillMoney.Worlds.1");
 				String w2 = KillMoney.cfg.getString("KillMoney.Worlds.2");
 				String w3 = KillMoney.cfg.getString("KillMoney.Worlds.3");
-				if(w.equals(w1)) {
-					if(KillMoney.econ.hasAccount(killer.getName())) {
+				if (w.equals(w1)) {
+					if (KillMoney.econ.hasAccount(killer.getName())) {
 						PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(killer, p, killerprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(giveevent);
 						if (!giveevent.isCancelled()) {
@@ -54,7 +53,7 @@ public class PlayerListener implements Listener{
 						}
 					}
 					
-					if(KillMoney.econ.hasAccount(p.getName())) {
+					if (KillMoney.econ.hasAccount(p.getName())) {
 						PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, killer, deathprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(takeevent);
 						if (!takeevent.isCancelled()) {
@@ -76,8 +75,8 @@ public class PlayerListener implements Listener{
 						}
 					}
 				}
-				else if(w.equals(w2)) {
-					if(KillMoney.econ.hasAccount(killer.getName())) {
+				else if (w.equals(w2)) {
+					if (KillMoney.econ.hasAccount(killer.getName())) {
 						PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(killer, p, killerprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(giveevent);
 						if (!giveevent.isCancelled()) {
@@ -99,7 +98,7 @@ public class PlayerListener implements Listener{
 						}
 					}
 					
-					if(KillMoney.econ.hasAccount(p.getName())) {
+					if (KillMoney.econ.hasAccount(p.getName())) {
 						PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, killer, deathprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(takeevent);
 						if (!takeevent.isCancelled()) {
@@ -121,8 +120,8 @@ public class PlayerListener implements Listener{
 						}
 					}
 				}
-				else if(w.equals(w3)) {
-					if(KillMoney.econ.hasAccount(killer.getName())) {
+				else if (w.equals(w3)) {
+					if (KillMoney.econ.hasAccount(killer.getName())) {
 						PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(killer, p, killerprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(giveevent);
 						if (!giveevent.isCancelled()) {
@@ -144,7 +143,7 @@ public class PlayerListener implements Listener{
 						}
 					}
 					
-					if(KillMoney.econ.hasAccount(p.getName())) {
+					if (KillMoney.econ.hasAccount(p.getName())) {
 						PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, killer, deathprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
 						Bukkit.getServer().getPluginManager().callEvent(takeevent);
 						if (!takeevent.isCancelled()) {
@@ -169,5 +168,4 @@ public class PlayerListener implements Listener{
 			}
 		}
 	}
-
 }
