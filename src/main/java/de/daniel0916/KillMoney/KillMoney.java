@@ -130,15 +130,15 @@ public class KillMoney extends JavaPlugin{
 		if (cmd.getName().equalsIgnoreCase("killmoney")) {
 			if (args.length == 0){
 				if (sender.hasPermission("killmoney.toogle")) {
-					if (cfg.getString("KillMoney.Enable").equalsIgnoreCase("true")) {
-						cfg.set("KillMoney.Enable", "false");
+					if (KillMoney.cfg.getBoolean("KillMoney.Enabled")) {
+						cfg.set("KillMoney.Enabled", false);
 						sender.sendMessage(prefix + ChatColor.GREEN + "KillMoney disabled");
 						saveConfig();
 						reloadConfig();
 						
 						return true;
 					} else {
-						cfg.set("KillMoney.Enable", "true");
+						cfg.set("KillMoney.Enabled", true);
 						sender.sendMessage(prefix + ChatColor.GREEN + "KillMoney enabled");	
 						saveConfig();
 						reloadConfig();
@@ -169,14 +169,14 @@ public class KillMoney extends JavaPlugin{
 			return;
 		}
 		
-		if (KillMoney.cfg.getString("KillMoney.Enable").equalsIgnoreCase("true")) {
+		if (KillMoney.cfg.getBoolean("KillMoney.Enabled")) {
 			if (w.equals(w1)) {
 				if (KillMoney.econ.hasAccount(Killer.getName())) {
 					PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".Message"));
 					Bukkit.getServer().getPluginManager().callEvent(giveevent);
 					if (!giveevent.isCancelled()) {
 						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage").equalsIgnoreCase("on")) {
+						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage")) {
 							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
 						}
 					}
@@ -188,7 +188,7 @@ public class KillMoney extends JavaPlugin{
 					Bukkit.getServer().getPluginManager().callEvent(giveevent);
 					if (!giveevent.isCancelled()) {
 						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage").equalsIgnoreCase("on")) {
+						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage")) {
 							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
 						}
 					}
@@ -200,7 +200,7 @@ public class KillMoney extends JavaPlugin{
 					Bukkit.getServer().getPluginManager().callEvent(giveevent);
 					if (!giveevent.isCancelled()) {
 						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage").equalsIgnoreCase("on")) {
+						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".showMessage")) {
 							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
 						}
 					}
@@ -257,48 +257,55 @@ public class KillMoney extends JavaPlugin{
 	
 	
 	public static void HandleMoneyForPlayer(Player Killer, Player p) {
-		double killerprice = KillMoney.cfg.getDouble("KillMoney.Player.KillerPrice");
-		double deathprice = KillMoney.cfg.getDouble("KillMoney.Player.DeathPrice");
-		
-		if (KillMoney.econ.hasAccount(Killer.getName())) {
-			PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(Killer, p, killerprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
-			Bukkit.getServer().getPluginManager().callEvent(giveevent);
-			if (!giveevent.isCancelled()) {
-				if (KillMoney.econ.bankBalance(p.getName()).balance < giveevent.getMoney()) {
-					if (KillMoney.cfg.getBoolean("KillMoney.Player.KillMoneyWhenPlayerHaveNoMoney")) {
-						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getString("KillMoney.Player.showKillMessage").equalsIgnoreCase("on")) {
-							String message = giveevent.getPrefix() + giveevent.getMessage();
-							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
-						}
-					}
-				} else {
-					KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-					if (KillMoney.cfg.getString("KillMoney.Player.showKillMessage").equalsIgnoreCase("on")) {
-						String message = giveevent.getPrefix() + giveevent.getMessage();
-						Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
-					}
-				}
-			}
-		}
+		double KillerPrice = KillMoney.cfg.getDouble("KillMoney.Player.KillerPrice");
+		double DeathPrice = KillMoney.cfg.getDouble("KillMoney.Player.DeathPrice");
+		double MinimumMoney = KillMoney.cfg.getDouble("KillMoney.Player.MinimumMoney");
 		
 		if (KillMoney.econ.hasAccount(p.getName())) {
-			PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, Killer, deathprice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
+			PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, Killer, DeathPrice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
 			Bukkit.getServer().getPluginManager().callEvent(takeevent);
 			if (!takeevent.isCancelled()) {
+				if (KillMoney.cfg.getBoolean("KillMoney.Player.MinimumMoneyEnabled")) {
+					if (KillMoney.econ.bankBalance(p.getName()).balance - takeevent.getMoney() < MinimumMoney) {
+						return;
+					}
+				}
+				
 				if (KillMoney.econ.bankBalance(p.getName()).balance < takeevent.getMoney()) {
 					if (KillMoney.cfg.getBoolean("KillMoney.Player.AllowMinusMoneyByDeath")) {
 						KillMoney.econ.withdrawPlayer(p.getName(), takeevent.getMoney());
-						if (KillMoney.cfg.getString("KillMoney.Player.showDeathMessage").equalsIgnoreCase("on")) {
+						if (KillMoney.cfg.getBoolean("KillMoney.Player.showDeathMessage")) {
 							String message = takeevent.getPrefix() + takeevent.getMessage();
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Killer>", Killer.getName())));
 						}
 					}
 				} else {
 					KillMoney.econ.withdrawPlayer(p.getName(), takeevent.getMoney());
-					if (KillMoney.cfg.getString("KillMoney.Player.showDeathMessage").equalsIgnoreCase("on")) {
+					if (KillMoney.cfg.getBoolean("KillMoney.Player.showDeathMessage")) {
 						String message = takeevent.getPrefix() + takeevent.getMessage();
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Killer>", Killer.getName())));
+					}
+				}
+			}
+		}
+		
+		if (KillMoney.econ.hasAccount(Killer.getName())) {
+			PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(Killer, p, KillerPrice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
+			Bukkit.getServer().getPluginManager().callEvent(giveevent);
+			if (!giveevent.isCancelled()) {
+				if (KillMoney.econ.bankBalance(p.getName()).balance < giveevent.getMoney()) {
+					if (KillMoney.cfg.getBoolean("KillMoney.Player.KillMoneyWhenPlayerHaveNoMoney")) {
+						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+						if (KillMoney.cfg.getBoolean("KillMoney.Player.showKillMessage")) {
+							String message = giveevent.getPrefix() + giveevent.getMessage();
+							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
+						}
+					}
+				} else {
+					KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+					if (KillMoney.cfg.getBoolean("KillMoney.Player.showKillMessage")) {
+						String message = giveevent.getPrefix() + giveevent.getMessage();
+						Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
 					}
 				}
 			}

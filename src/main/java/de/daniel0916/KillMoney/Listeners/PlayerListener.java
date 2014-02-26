@@ -11,7 +11,7 @@ public class PlayerListener implements Listener{
 	
 	@EventHandler
 	public void onPlayerDeath(PlayerDeathEvent event) {
-		if (KillMoney.cfg.getString("KillMoney.Enable").equalsIgnoreCase("true")) {
+		if (KillMoney.cfg.getBoolean("KillMoney.Enabled")) {
 			Player p = event.getEntity().getPlayer();
 			Player killer = event.getEntity().getKiller();
 			
