@@ -163,13 +163,21 @@ public class KillMoney extends JavaPlugin{
 		String w2 = KillMoney.cfg.getString("KillMoney.Worlds.2");
 		String w3 = KillMoney.cfg.getString("KillMoney.Worlds.3");
 		
-		double Price = GetPriceFromEntityType(Mob);
-		if (Price <= 0)
-		{
-			return;
-		}
-		
 		if (KillMoney.cfg.getBoolean("KillMoney.Enabled")) {
+			double Price = GetPriceFromEntityType(Mob);
+			if (Price <= 0)
+			{
+				return;
+			}
+			
+			String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".MoneyChance");
+			int percent = Integer.parseInt(percentString.replaceAll("%", ""));
+			if (percent < 100) {
+				if ((Math.random() * 100) > percent) {
+					return;
+				}
+			}
+			
 			if (w.equals(w1)) {
 				if (KillMoney.econ.hasAccount(Killer.getName())) {
 					PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".Message"));
@@ -260,6 +268,14 @@ public class KillMoney extends JavaPlugin{
 		double KillerPrice = KillMoney.cfg.getDouble("KillMoney.Player.KillerPrice");
 		double DeathPrice = KillMoney.cfg.getDouble("KillMoney.Player.DeathPrice");
 		double MinimumMoney = KillMoney.cfg.getDouble("KillMoney.Player.MinimumMoney");
+		
+		String percentString = cfg.getString("KillMoney.Player.MoneyChance");
+		int percent = Integer.parseInt(percentString.replaceAll("%", ""));
+		if (percent < 100) {
+			if ((Math.random() * 100) > percent) {
+				return;
+			}
+		}
 		
 		if (KillMoney.econ.hasAccount(p.getName())) {
 			PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, Killer, DeathPrice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));

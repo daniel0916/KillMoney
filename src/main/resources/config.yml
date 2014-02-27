@@ -19,68 +19,85 @@ KillMoney:
     showDeathMessage: true
     KillMessage: '&aYou have get Money for Killing &b<Player>'
     DeathMessage: '&eYou lost Money for been killed from &b<Killer>'
+    MoneyChance: 100%
   Mob:
     Creeper:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Creeper'
+      MoneyChance: 100%
     Zombie:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Zombie'
+      MoneyChance: 100%
     Spider:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Spider'
+      MoneyChance: 100%
     Skeleton:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Skeleton'
+      MoneyChance: 100%
     Blaze:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Blaze'
+      MoneyChance: 100%
     Cave_Spider:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Cave Spider'
+      MoneyChance: 100%
     Ender_Dragon:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Ender Dragon'
+      MoneyChance: 100%
     Enderman:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Enderman'
+      MoneyChance: 100%
     Ghast:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Ghast'
+      MoneyChance: 100%
     Giant:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Giant'
+      MoneyChance: 100%
     Magma_Cube:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Magma Cube'
+      MoneyChance: 100%
     Pig_Zombie:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Pig Zombie'
+      MoneyChance: 100%
     Silverfish:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Silverfish'
+      MoneyChance: 100%
     Slime:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Slime'
+      MoneyChance: 100%
     Witch:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Witch'
+      MoneyChance: 100%
     Wither:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Wither'
+      MoneyChance: 100%
