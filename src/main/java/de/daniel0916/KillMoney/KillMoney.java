@@ -171,7 +171,7 @@ public class KillMoney extends JavaPlugin{
 			}
 			
 			String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob) + ".MoneyChance");
-			int percent = Integer.parseInt(percentString.replaceAll("%", ""));
+			int percent = Integer.parseInt(percentString.replace("%", ""));
 			if (percent < 100) {
 				if ((Math.random() * 100) > percent) {
 					return;
@@ -270,7 +270,7 @@ public class KillMoney extends JavaPlugin{
 		double MinimumMoney = KillMoney.cfg.getDouble("KillMoney.Player.MinimumMoney");
 		
 		String percentString = cfg.getString("KillMoney.Player.MoneyChance");
-		int percent = Integer.parseInt(percentString.replaceAll("%", ""));
+		int percent = Integer.parseInt(percentString.replace("%", ""));
 		if (percent < 100) {
 			if ((Math.random() * 100) > percent) {
 				return;
