@@ -26,78 +26,126 @@ KillMoney:
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Creeper'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Zombie:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Zombie'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Spider:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Spider'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Skeleton:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Skeleton'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Blaze:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Blaze'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Cave_Spider:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Cave Spider'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Ender_Dragon:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Ender Dragon'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Enderman:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Enderman'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Ghast:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Ghast'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Giant:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Giant'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Magma_Cube:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Magma Cube'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Pig_Zombie:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Pig Zombie'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Silverfish:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Silverfish'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Slime:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Slime'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Witch:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Witch'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0
     Wither:
       Price: 1.0
       showMessage: true
       Message: '&aYou have get Money for Killing a &9Wither'
       MoneyChance: 100%
+      # Example: 5:2,64      This mean: 5:2 = Birch Wooden Planks   64 = Amount of Planks
+      ItemDrop:
+        - 0

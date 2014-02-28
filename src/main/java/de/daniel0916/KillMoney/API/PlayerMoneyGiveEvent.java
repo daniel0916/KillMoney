@@ -1,6 +1,6 @@
 package de.daniel0916.KillMoney.API;
 
-import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
@@ -11,11 +11,11 @@ public class PlayerMoneyGiveEvent extends Event{
     private String message_;
     private String prefix_;
     private Player player_;
-    private EntityType monster_;
+    private Entity monster_;
     private double money_;
     private boolean cancelled;
     
-    public PlayerMoneyGiveEvent(Player player, EntityType monster, double money, String prefix, String message) {
+    public PlayerMoneyGiveEvent(Player player, Entity monster, double money, String prefix, String message) {
     	message_ = message;
     	prefix_ = prefix;
     	player_ = player;
@@ -27,7 +27,7 @@ public class PlayerMoneyGiveEvent extends Event{
         return message_;
     }
     
-    public EntityType getMob() {
+    public Entity getMob() {
         return monster_;
     }
     

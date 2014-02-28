@@ -1,5 +1,6 @@
 package de.daniel0916.KillMoney.Listeners;
 
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,6 +13,7 @@ public class Entity_Enderman implements Listener{
 	
 	@EventHandler
 	public void onEntityDeath(EntityDeathEvent event) {
+		Entity e = event.getEntity();
 		EntityType en = event.getEntityType();
 		if (!(event.getEntity().getKiller() instanceof Player)) {
 			return;
@@ -19,7 +21,7 @@ public class Entity_Enderman implements Listener{
 		Player Killer = event.getEntity().getKiller();
 		
 		if (en.equals(EntityType.ENDERMAN)) {
-			KillMoney.HandleMoneyForMob(Killer, en);
+			KillMoney.HandleMoneyForMob(Killer, e);
 		}
 	}
 }
