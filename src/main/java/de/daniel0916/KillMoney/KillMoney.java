@@ -168,28 +168,22 @@ public class KillMoney extends JavaPlugin{
 		String w3 = KillMoney.cfg.getString("KillMoney.Worlds.3");
 		
 		if (KillMoney.cfg.getBoolean("KillMoney.Enabled")) {
-			double Price = GetPriceFromEntityType(Mob.getType());
-			if (Price <= 0)
-			{
-				return;
-			}
-			
-			String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
-			int percent = Integer.parseInt(percentString.replace("%", ""));
-			if (percent < 100) {
-				if ((Math.random() * 100) > percent) {
-					return;
-				}
-			}
-			
 			if (w.equals(w1)) {
-				if (KillMoney.econ.hasAccount(Killer.getName())) {
-					PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
-					Bukkit.getServer().getPluginManager().callEvent(giveevent);
-					if (!giveevent.isCancelled()) {
-						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
-							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+				double Price = GetPriceFromEntityType(Mob.getType());
+				
+				if (Price > 0) {
+					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
+					int percent = Integer.parseInt(percentString.replace("%", ""));
+					if ((Math.random() * 100) <= percent) {
+						if (KillMoney.econ.hasAccount(Killer.getName())) {
+							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
+							Bukkit.getServer().getPluginManager().callEvent(giveevent);
+							if (!giveevent.isCancelled()) {
+								KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+								if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
+									Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+								}
+							}
 						}
 					}
 				}
@@ -199,32 +193,47 @@ public class KillMoney extends JavaPlugin{
 					if (!item.equals("0")) {
 						String[] split = item.split(",");
 						String[] split2 = split[0].split(":");
+						String[] split3 = split[1].split("_");
 						
-						String amount = null;
-						if (split.length == 1) {
-							amount = "1";
-						}
-						else if (split.length == 2) {
-							amount = split[1];
-						}
+						String ItemPercentString = split3[1];
+						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
 						
-						if (split2.length == 2) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
-						}
-						else if (split2.length == 1) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+						if ((Math.random() * 100) <= ItemPercent) {
+							String amount = null;
+							if (split.length == 1) {
+								amount = "1";
+							}
+							else if (split.length == 2) {
+								amount = split3[0];
+							}
+							
+							if (split2.length == 2) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
+							}
+							else if (split2.length == 1) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+							}
 						}
 					}
 				}
 			}
+			
 			else if (w.equals(w2)) {
-				if (KillMoney.econ.hasAccount(Killer.getName())) {
-					PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
-					Bukkit.getServer().getPluginManager().callEvent(giveevent);
-					if (!giveevent.isCancelled()) {
-						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
-							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+				double Price = GetPriceFromEntityType(Mob.getType());
+				
+				if (Price > 0) {
+					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
+					int percent = Integer.parseInt(percentString.replace("%", ""));
+					if ((Math.random() * 100) <= percent) {
+						if (KillMoney.econ.hasAccount(Killer.getName())) {
+							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
+							Bukkit.getServer().getPluginManager().callEvent(giveevent);
+							if (!giveevent.isCancelled()) {
+								KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+								if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
+									Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+								}
+							}
 						}
 					}
 				}
@@ -234,32 +243,47 @@ public class KillMoney extends JavaPlugin{
 					if (!item.equals("0")) {
 						String[] split = item.split(",");
 						String[] split2 = split[0].split(":");
+						String[] split3 = split[1].split("_");
 						
-						String amount = null;
-						if (split.length == 1) {
-							amount = "1";
-						}
-						else if (split.length == 2) {
-							amount = split[1];
-						}
+						String ItemPercentString = split3[1];
+						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
 						
-						if (split2.length == 2) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
-						}
-						else if (split2.length == 1) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+						if ((Math.random() * 100) <= ItemPercent) {
+							String amount = null;
+							if (split.length == 1) {
+								amount = "1";
+							}
+							else if (split.length == 2) {
+								amount = split3[0];
+							}
+							
+							if (split2.length == 2) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
+							}
+							else if (split2.length == 1) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+							}
 						}
 					}
 				}
 			}
+			
 			else if (w.equals(w3)) {
-				if (KillMoney.econ.hasAccount(Killer.getName())) {
-					PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
-					Bukkit.getServer().getPluginManager().callEvent(giveevent);
-					if (!giveevent.isCancelled()) {
-						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
-						if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
-							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+				double Price = GetPriceFromEntityType(Mob.getType());
+				
+				if (Price > 0) {
+					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
+					int percent = Integer.parseInt(percentString.replace("%", ""));
+					if ((Math.random() * 100) <= percent) {
+						if (KillMoney.econ.hasAccount(Killer.getName())) {
+							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
+							Bukkit.getServer().getPluginManager().callEvent(giveevent);
+							if (!giveevent.isCancelled()) {
+								KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+								if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
+									Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
+								}
+							}
 						}
 					}
 				}
@@ -269,20 +293,26 @@ public class KillMoney extends JavaPlugin{
 					if (!item.equals("0")) {
 						String[] split = item.split(",");
 						String[] split2 = split[0].split(":");
+						String[] split3 = split[1].split("_");
 						
-						String amount = null;
-						if (split.length == 1) {
-							amount = "1";
-						}
-						else if (split.length == 2) {
-							amount = split[1];
-						}
+						String ItemPercentString = split3[1];
+						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
 						
-						if (split2.length == 2) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
-						}
-						else if (split2.length == 1) {
-							Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+						if ((Math.random() * 100) <= ItemPercent) {
+							String amount = null;
+							if (split.length == 1) {
+								amount = "1";
+							}
+							else if (split.length == 2) {
+								amount = split3[0];
+							}
+							
+							if (split2.length == 2) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount), (short)Integer.parseInt(split2[1])));
+							}
+							else if (split2.length == 1) {
+								Mob.getWorld().dropItem(Mob.getLocation(), new ItemStack(Integer.parseInt(split2[0]), Integer.parseInt(amount)));
+							}
 						}
 					}
 				}
