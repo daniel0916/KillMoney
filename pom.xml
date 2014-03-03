@@ -4,7 +4,7 @@
 
   <groupId>de.daniel0916</groupId>
   <artifactId>KillMoney</artifactId>
-  <version>2.3</version>
+  <version>2.4</version>
   <packaging>jar</packaging>
   <name>KillMoney</name>
   <description>KillMoney is a plugin that you allow to give players money for mob/player kills.</description>
