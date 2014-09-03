@@ -1,5 +1,3 @@
-/*Original plugin by daniel0916.
-Support for percentages with decimals added by XXLuigiMario*/
 package de.daniel0916.KillMoney;
 
 import java.io.File;
