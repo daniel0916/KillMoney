@@ -66,13 +66,13 @@
   <dependencies>
   	<dependency>
   		<groupId>org.bukkit</groupId>
-  		<artifactId>craftbukkit</artifactId>
-  		<version>1.7.2-R0.3</version>
+  		<artifactId>bukkit</artifactId>
+  		<version>1.7.10-R0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>net.milkbowl.vault</groupId>
   		<artifactId>Vault</artifactId>
-  		<version>1.2.31</version>
+  		<version>1.4.1</version>
   	</dependency>
   </dependencies>
 </project>
