@@ -1,9 +1,12 @@
+/*Original plugin by daniel0916.
+Support for percentages with decimals added by XXLuigiMario*/
 package de.daniel0916.KillMoney;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import net.milkbowl.vault.economy.Economy;
 import net.milkbowl.vault.permission.Permission;
@@ -52,6 +55,7 @@ public class KillMoney extends JavaPlugin{
 	public static Economy econ = null;
 	
 	public static String prefix = null;
+	public static Random random = new Random();
 	
 	@Override
 	public void onEnable() {
@@ -173,13 +177,13 @@ public class KillMoney extends JavaPlugin{
 				
 				if (Price > 0) {
 					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
-					int percent = Integer.parseInt(percentString.replace("%", ""));
-					if ((Math.random() * 100) <= percent) {
-						if (KillMoney.econ.hasAccount(Killer.getName())) {
+					double percent = Double.parseDouble(percentString.replace("%", ""));
+					if (100 * random.nextDouble() <= percent) {
+						if (KillMoney.econ.hasAccount(Killer)) {
 							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
 							Bukkit.getServer().getPluginManager().callEvent(giveevent);
 							if (!giveevent.isCancelled()) {
-								KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+								KillMoney.econ.depositPlayer(Killer, giveevent.getMoney());
 								if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
 									Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
 								}
@@ -196,9 +200,9 @@ public class KillMoney extends JavaPlugin{
 						String[] split3 = split[1].split("_");
 						
 						String ItemPercentString = split3[1];
-						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
+						double ItemPercent = Double.parseDouble(ItemPercentString.replace("%", ""));
 						
-						if ((Math.random() * 100) <= ItemPercent) {
+						if (100 * random.nextDouble() <= ItemPercent) {
 							String amount = null;
 							if (split.length == 1) {
 								amount = "1";
@@ -223,8 +227,8 @@ public class KillMoney extends JavaPlugin{
 				
 				if (Price > 0) {
 					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
-					int percent = Integer.parseInt(percentString.replace("%", ""));
-					if ((Math.random() * 100) <= percent) {
+					double percent = Double.parseDouble(percentString.replace("%", ""));
+					if (100 * random.nextDouble() <= percent) {
 						if (KillMoney.econ.hasAccount(Killer.getName())) {
 							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
 							Bukkit.getServer().getPluginManager().callEvent(giveevent);
@@ -246,9 +250,9 @@ public class KillMoney extends JavaPlugin{
 						String[] split3 = split[1].split("_");
 						
 						String ItemPercentString = split3[1];
-						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
+						double ItemPercent = Double.parseDouble(ItemPercentString.replace("%", ""));
 						
-						if ((Math.random() * 100) <= ItemPercent) {
+						if (100 * random.nextDouble() <= ItemPercent) {
 							String amount = null;
 							if (split.length == 1) {
 								amount = "1";
@@ -273,13 +277,13 @@ public class KillMoney extends JavaPlugin{
 				
 				if (Price > 0) {
 					String percentString = cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".MoneyChance");
-					int percent = Integer.parseInt(percentString.replace("%", ""));
-					if ((Math.random() * 100) <= percent) {
-						if (KillMoney.econ.hasAccount(Killer.getName())) {
+					double percent = Double.parseDouble(percentString.replace("%", ""));
+					if (100 * random.nextDouble() <= percent) {
+						if (KillMoney.econ.hasAccount(Killer)) {
 							PlayerMoneyGiveEvent giveevent = new PlayerMoneyGiveEvent(Killer, Mob, Price, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".Message"));
 							Bukkit.getServer().getPluginManager().callEvent(giveevent);
 							if (!giveevent.isCancelled()) {
-								KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+								KillMoney.econ.depositPlayer(Killer, giveevent.getMoney());
 								if (KillMoney.cfg.getBoolean("KillMoney.Mob." + GetNameFromEntityType(Mob.getType()) + ".showMessage")) {
 									Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', giveevent.getPrefix() + giveevent.getMessage()));
 								}
@@ -296,9 +300,9 @@ public class KillMoney extends JavaPlugin{
 						String[] split3 = split[1].split("_");
 						
 						String ItemPercentString = split3[1];
-						int ItemPercent = Integer.parseInt(ItemPercentString.replace("%", ""));
+						double ItemPercent = Double.parseDouble(ItemPercentString.replace("%", ""));
 						
-						if ((Math.random() * 100) <= ItemPercent) {
+						if (100 * random.nextDouble() <= ItemPercent) {
 							String amount = null;
 							if (split.length == 1) {
 								amount = "1";
@@ -373,14 +377,14 @@ public class KillMoney extends JavaPlugin{
 		double MinimumMoney = KillMoney.cfg.getDouble("KillMoney.Player.MinimumMoney");
 		
 		String percentString = cfg.getString("KillMoney.Player.MoneyChance");
-		int percent = Integer.parseInt(percentString.replace("%", ""));
+		double percent = Double.parseDouble(percentString.replace("%", ""));
 		if (percent < 100) {
-			if ((Math.random() * 100) > percent) {
+			if (100 * random.nextDouble() < percent) {
 				return;
 			}
 		}
 		
-		if (KillMoney.econ.hasAccount(p.getName())) {
+		if (KillMoney.econ.hasAccount(p)) {
 			PlayerMoneyTakeByPlayerEvent takeevent = new PlayerMoneyTakeByPlayerEvent(p, Killer, DeathPrice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.DeathMessage"));
 			Bukkit.getServer().getPluginManager().callEvent(takeevent);
 			if (!takeevent.isCancelled()) {
@@ -392,14 +396,14 @@ public class KillMoney extends JavaPlugin{
 				
 				if (KillMoney.econ.bankBalance(p.getName()).balance < takeevent.getMoney()) {
 					if (KillMoney.cfg.getBoolean("KillMoney.Player.AllowMinusMoneyByDeath")) {
-						KillMoney.econ.withdrawPlayer(p.getName(), takeevent.getMoney());
+						KillMoney.econ.withdrawPlayer(p, takeevent.getMoney());
 						if (KillMoney.cfg.getBoolean("KillMoney.Player.showDeathMessage")) {
 							String message = takeevent.getPrefix() + takeevent.getMessage();
 							p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Killer>", Killer.getName())));
 						}
 					}
 				} else {
-					KillMoney.econ.withdrawPlayer(p.getName(), takeevent.getMoney());
+					KillMoney.econ.withdrawPlayer(p, takeevent.getMoney());
 					if (KillMoney.cfg.getBoolean("KillMoney.Player.showDeathMessage")) {
 						String message = takeevent.getPrefix() + takeevent.getMessage();
 						p.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Killer>", Killer.getName())));
@@ -408,20 +412,20 @@ public class KillMoney extends JavaPlugin{
 			}
 		}
 		
-		if (KillMoney.econ.hasAccount(Killer.getName())) {
+		if (KillMoney.econ.hasAccount(Killer)) {
 			PlayerMoneyGiveByPlayerEvent giveevent = new PlayerMoneyGiveByPlayerEvent(Killer, p, KillerPrice, KillMoney.prefix, KillMoney.cfg.getString("KillMoney.Player.KillMessage"));
 			Bukkit.getServer().getPluginManager().callEvent(giveevent);
 			if (!giveevent.isCancelled()) {
 				if (KillMoney.econ.bankBalance(p.getName()).balance < giveevent.getMoney()) {
 					if (KillMoney.cfg.getBoolean("KillMoney.Player.KillMoneyWhenPlayerHaveNoMoney")) {
-						KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+						KillMoney.econ.depositPlayer(Killer, giveevent.getMoney());
 						if (KillMoney.cfg.getBoolean("KillMoney.Player.showKillMessage")) {
 							String message = giveevent.getPrefix() + giveevent.getMessage();
 							Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
 						}
 					}
 				} else {
-					KillMoney.econ.depositPlayer(Killer.getName(), giveevent.getMoney());
+					KillMoney.econ.depositPlayer(Killer, giveevent.getMoney());
 					if (KillMoney.cfg.getBoolean("KillMoney.Player.showKillMessage")) {
 						String message = giveevent.getPrefix() + giveevent.getMessage();
 						Killer.sendMessage(ChatColor.translateAlternateColorCodes('&', message.replaceAll("<Player>", p.getName())));
